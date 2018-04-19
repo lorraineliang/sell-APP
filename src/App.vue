@@ -1,23 +1,70 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <!-- <div class="header">
+      i am header!
+    </div> -->
+    <v-header :seller="seller"></v-header>
+    <div class="tab border-1px">
+      <div class="tab-item">
+        <router-link :to="{path:'/goods'}">商品</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link :to="{path:'/ratings'}">评论</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link :to="{path:'/seller'}">商家</router-link>
+      </div>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
+import header from 'components/header/header.vue' // 导入组件
+/* eslint-disable */
+const ERR_OK=0;
+
+export default{
+  data(){
+    return{
+      seller:{}
+    }
+  },
+  created(){
+    this.$http.get('/api/seller').then((res) => {
+      // console.log(res);
+      res=res.body;
+      // res=JSON.parse(res) 错误写法
+      console.log(res);
+      console.log('pro',res.promise);
+      if (res.errno === ERR_OK) {
+        this.seller=res.data;
+        console.log('sell',this.seller);
+      }
+
+    })
+  },
+  components:{'v-header':header} // 定义组件
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+@import "common/stylus/mixin.styl"
+#app
+  .tab
+    display:flex
+    width:100%
+    height:40px
+    line-height:40px
+    // border-bottom :1px solid rgba(7,17,27,0.1)
+    border-1px(rgba(7,17,27,0.1))
+    .tab-item
+      flex:1
+      text-align:center
+      & > a //& 代表父元素 这里表示为 .tab-item
+        display: block
+        font-size:14px
+        color:rgb(77,85,93)
+        &.active//这里的&指a 注意要配置路由激活 linkActiveClass: 'active'
+          color:rgb(240, 20, 20)
 </style>
