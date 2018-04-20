@@ -36,7 +36,7 @@ export default{
       res=res.body;
       // res=JSON.parse(res) 错误写法
       console.log(res);
-      console.log('pro',res.promise);
+      // console.log('pro',res.promise);
       if (res.errno === ERR_OK) {
         this.seller=res.data;
         console.log('sell',this.seller);
