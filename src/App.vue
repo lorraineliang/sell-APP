@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <!-- <div class="header">
       i am header!
     </div> -->
@@ -50,21 +50,20 @@ export default{
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import "common/stylus/mixin.styl"
-#app
-  .tab
-    display:flex
-    width:100%
-    height:40px
-    line-height:40px
-    // border-bottom :1px solid rgba(7,17,27,0.1)
-    border-1px(rgba(7,17,27,0.1))
-    .tab-item
-      flex:1
-      text-align:center
-      & > a //& 代表父元素 这里表示为 .tab-item
-        display: block
-        font-size:14px
-        color:rgb(77,85,93)
-        &.active//这里的&指a 注意要配置路由激活 linkActiveClass: 'active'
-          color:rgb(240, 20, 20)
+.tab
+  display:flex
+  width:100%
+  height:40px
+  line-height:40px
+  // border-bottom :1px solid rgba(7,17,27,0.1)
+  border-1px(rgba(7,17,27,0.1))
+  .tab-item
+    flex:1
+    text-align:center
+    & > a //& 代表父元素 这里表示为 .tab-item
+      display: block
+      font-size:14px
+      color:rgb(77,85,93)
+      &.active//这里的&指a 注意要配置路由激活 linkActiveClass: 'active'
+        color:rgb(240, 20, 20)
 </style>
